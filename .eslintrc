@@ -1,0 +1,60 @@
+{
+	"root": true,
+	"globals": {
+		"_sharedObj": false
+	},
+	"settings": {
+		"react": {
+			"version": "detect"
+		}
+	},
+	"env": {
+		"browser": true,
+		"node": true,
+		"es6": true
+	},
+	"parser": "@typescript-eslint/parser",
+	"extends": ["plugin:react/recommended", "airbnb-typescript/base", "prettier/@typescript-eslint", "prettier"],
+	"plugins": ["react-hooks", "@typescript-eslint"],
+	"rules": {
+		"prettier/prettier": "off",
+
+		// Enable in prod
+		"no-console": "warn",
+
+		// React
+		"react/display-name": "off", // we use hooks
+		"react/prop-types": "off", // we use typescript, so we can disable this
+
+		// Import
+		"import/extensions": "off",
+		"import/no-extraneous-dependencies": "off", // not useful with types
+		"import/no-unresolved": "off",
+		"import/order": "warn", // use npm run lint:fix
+		"import/prefer-default-export": "warn",
+
+		// ESLint
+		"lines-between-class-members": [
+			"error",
+			"always",
+			{
+				"exceptAfterSingleLine": true
+			}
+		],
+		"no-bitwise": "off",
+		"no-nested-ternary": "off",
+		"no-param-reassign": ["off"], // breaks reduce reassigning acc
+		"no-plusplus": "off",
+		"no-restricted-globals": "off", // use self in sw.js
+		"no-return-assign": "off",
+		"no-sequences": "off", // opinionated, I like the comma operator
+		"no-shadow": "off", // annoying, especially in promises
+		"no-underscore-dangle": "off",
+		"no-unused-expressions": "off",
+		"spaced-comment": "off",
+
+		// TSLint
+		"@typescript-eslint/explicit-function-return-type": "error",
+		"@typescript-eslint/no-use-before-define": "off" // breaks a lot of hooks
+	}
+}

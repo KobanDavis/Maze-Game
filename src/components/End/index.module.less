@@ -1,0 +1,41 @@
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	background-color: black;
+}
+
+.title {
+	text-align: center;
+	color: white;
+	white-space: pre-line;
+	font-size: 3rem;
+}
+
+.buttons {
+	width: 40rem;
+	margin-top: 2rem;
+	display: flex;
+	justify-content: space-around;
+	opacity: 0;
+	transition: opacity 1s ease;
+	&.fade {
+		opacity: 1;
+	}
+}
+
+.button {
+	border: 2px solid #ffd700;
+	padding: 1rem;
+	background-color: black;
+	color: white;
+	font-family: inherit;
+	font-size: 1.5rem;
+	transition: color 0.2s ease, background-color 0.2s ease;
+	&:hover {
+		background-color: #ffd700;
+		color: black;
+	}
+}
