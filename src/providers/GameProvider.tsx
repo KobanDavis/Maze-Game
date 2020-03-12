@@ -1,7 +1,6 @@
 import React, { useState, useContext, createContext, FC, useEffect } from 'react'
 import { GameState, Room, Coords, EntityChances, EntityType, Entity, Stats } from '../types'
 import entities from '../entities'
-import { useDialogue } from './DialogueProvider'
 
 interface GameContext {
 	deleteSavedGame(): void
@@ -214,8 +213,6 @@ const GameProvider: FC = props => {
 		playerWon: null
 	})
 
-	const { sendMessage } = useDialogue()
-
 	const startGame = (): void => {
 		setGameState(o => ({ ...o, isGameLoaded: true }))
 		deleteEntity(gameState.start)
@@ -262,14 +259,11 @@ const GameProvider: FC = props => {
 	}
 
 	const endGame = (playerWon: boolean): void => {
-		sendMessage(playerWon ? 'You escaped the maze!' : 'You lost!')
 		setGameState(o => ({ ...o, playerWon }))
-		deleteSavedGame()
+		setImmediate(deleteSavedGame) // wait for gameState change, then clear localStorage, weird case
 	}
 
-	const deleteSavedGame = (): void => {
-		localStorage.clear()
-	}
+	const deleteSavedGame = (): void => localStorage.clear()
 
 	useEffect(() => {
 		if (gameState.isGameLoaded) {

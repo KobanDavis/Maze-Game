@@ -7,14 +7,13 @@ interface FadeTextProps {
 }
 
 const FadeText: FC<FadeTextProps> = props => {
-	const [anim, setAnim] = useState<boolean>(false)
-
-	useEffect(() => {
-		setAnim(false)
-		setTimeout(() => setAnim(true), 10)
-	}, [props.text])
-
-	return <div className={[styles.wrapper, ...(anim ? [styles.anim] : [])].join(' ')}>{props.text}</div>
+	const [key, setKey] = useState<number>(0)
+	useEffect(() => setKey(key + 1), [props.text])
+	return (
+		<div key={key} className={styles.wrapper}>
+			{props.text}
+		</div>
+	)
 }
 
 export default FadeText

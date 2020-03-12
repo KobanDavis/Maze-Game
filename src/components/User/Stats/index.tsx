@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import { useUser } from '../../../providers/UserProvider'
 import styles from './index.module.less'
 import PlayerSprite from '../../PlayerSprite'
+import HealthBar from '../../HealthBar'
 
 const Stats: FC = () => {
 	const { user } = useUser()
@@ -36,7 +37,12 @@ const Stats: FC = () => {
 				</div>
 			</div>
 			<div className={styles.user}>
-				<PlayerSprite />
+				<div className={styles.sprite}>
+					<PlayerSprite />
+				</div>
+				<div className={styles.healthBar}>
+					<HealthBar health={user.health} maxHealth={user.maxHealth} />
+				</div>
 			</div>
 		</div>
 	)

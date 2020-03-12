@@ -1,19 +1,27 @@
 import { Entity, EntityType, ArmorPiece, Weapon, Stats } from './types'
 
 import bagofgold from './assets/bagofgold.png'
-import skeleton from './assets/skeleton.png'
-import zombie from './assets/zombie.png'
-import goblin from './assets/goblin.png'
-import ladder from './assets/ladder.png'
+import pileofcoins from './assets/pileofcoins.png'
+
 import broadsword from './assets/broadsword.png'
 import sharpbone from './assets/sharpbone.png'
-import bigpotion from './assets/bigpotion.png'
-import smallpotion from './assets/smallpotion.png'
+import spear from './assets/spear.png'
+import brick from './assets/brick.png'
+import knife from './assets/knife.png'
+
 import helmet from './assets/helmet.png'
 import chestplate from './assets/chestplate.png'
 import leggings from './assets/leggings.png'
 import boots from './assets/boots.png'
-import pileofcoins from './assets/pileofcoins.png'
+
+import bigpotion from './assets/bigpotion.png'
+import smallpotion from './assets/smallpotion.png'
+
+import skeleton from './assets/skeleton.png'
+import zombie from './assets/zombie.png'
+import goblin from './assets/goblin.png'
+
+import ladder from './assets/ladder.png'
 
 const gold: Entity<number>[] = [
 	{
@@ -32,12 +40,12 @@ const gold: Entity<number>[] = [
 
 const weapon: Entity<Weapon>[] = [
 	{
-		name: 'broadsword',
+		name: 'brick',
 		type: 'weapon',
 		action: {
-			attack: 5
+			attack: 1
 		},
-		image: broadsword
+		image: brick
 	},
 	{
 		name: 'sharp bone',
@@ -46,6 +54,30 @@ const weapon: Entity<Weapon>[] = [
 			attack: 2
 		},
 		image: sharpbone
+	},
+	{
+		name: 'spear',
+		type: 'weapon',
+		action: {
+			attack: 3
+		},
+		image: spear
+	},
+	{
+		name: 'knife',
+		type: 'weapon',
+		action: {
+			attack: 4
+		},
+		image: knife
+	},
+	{
+		name: 'broadsword',
+		type: 'weapon',
+		action: {
+			attack: 5
+		},
+		image: broadsword
 	}
 ]
 

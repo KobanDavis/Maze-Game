@@ -51,8 +51,11 @@ const EntitySquare: FC<EntitySquareProps> = props => {
 		}
 	}
 
-	const name = props.entity ? props.entity.name.slice(0, 1).toUpperCase() + props.entity.name.slice(1) : null
-	const type = props.entity ? props.entity.type.slice(0, 1).toUpperCase() + props.entity.type.slice(1) : null
+	const capitalize = (s: string): string => s.slice(0, 1).toUpperCase() + s.slice(1)
+
+	const name = props.entity ? capitalize(props.entity.name) : null
+	const type = props.entity ? capitalize(props.entity.type) : null
+
 	let effect = null
 	if (props.entity !== null) {
 		switch (props.entity.type) {

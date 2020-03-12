@@ -1,8 +1,11 @@
 .wrapper {
 	opacity: 1;
 	color: white;
-	&.anim {
-		transition: opacity 1s ease, transform 1s ease;
+	animation: fade 1s ease forwards;
+}
+
+@keyframes fade {
+	100% {
 		opacity: 0;
 		transform: translateY(-4rem);
 	}
