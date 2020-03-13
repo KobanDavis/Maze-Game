@@ -16,7 +16,7 @@ interface FightProps {
 }
 
 const Fight: FC<FightProps> = props => {
-	const { user, attackPlayer, addGold } = useUser()
+	const { user, attackPlayer, addGold, decrementArmorDurability, decrementWeaponDurability } = useUser()
 	const { endFight, attackEnemy, gameState, endGame } = useGame()
 	const { sendMessage } = useDialogue()
 
@@ -34,18 +34,19 @@ const Fight: FC<FightProps> = props => {
 					endGame(false)
 				} else if (props.enemy.action.health <= 0) {
 					endFight()
-					sendMessage('You won the fight!')
 					sendMessage(`The ${props.enemy.name} was slain!`)
 					sendMessage(`The ${props.enemy.name} dropped ${props.enemy.action.gold}g!`)
 					addGold(props.enemy.action.gold)
 				} else {
 					if (turn % 2 === 0) {
+						// turn based, even = user
 						let { attack } = user
 						if (user.weapon) attack += user.weapon.action.attack
 						const damage = calculateDamage(attack, props.enemy.action.defence)
 						setUserDamageTaken(null)
 						setEnemyDamageTaken(damage > 0 ? damage : 0)
 						attackEnemy(damage)
+						decrementWeaponDurability()
 					} else {
 						const damage = calculateDamage(
 							gameState.enemy.action.attack,
@@ -54,6 +55,7 @@ const Fight: FC<FightProps> = props => {
 						setEnemyDamageTaken(null)
 						setUserDamageTaken(damage > 0 ? damage : 0)
 						attackPlayer(damage)
+						decrementArmorDurability()
 					}
 					setTurn(turn + 1)
 				}

@@ -10,7 +10,7 @@ interface EntitySquareProps {
 
 const EntitySquare: FC<EntitySquareProps> = props => {
 	const [isHovering, setIsHovering] = useState<boolean>(false)
-	const [position, setPosition] = useState<Coords>({ x: 0, y: 0 })
+	const [position, setPosition] = useState<Coords>(null)
 	const tooltip = useRef<HTMLDivElement>(null)
 	const { equipArmor, equipWeapon, consumePotion, user, unequipArmor, unequipWeapon } = useUser()
 
@@ -57,16 +57,19 @@ const EntitySquare: FC<EntitySquareProps> = props => {
 	const type = props.entity ? capitalize(props.entity.type) : null
 
 	let effect = null
+	let durability = null
 	if (props.entity !== null) {
 		switch (props.entity.type) {
 			case 'armor':
 				effect = `+${props.entity.action.defence} defence`
+				durability = `${props.entity.action.durability} / ${props.entity.action.maxDurability} Durability `
 				break
 			case 'potion':
 				effect = `Restore ${props.entity.action} health`
 				break
 			case 'weapon':
 				effect = `+${props.entity.action.attack} attack`
+				durability = `${props.entity.action.durability} / ${props.entity.action.maxDurability} Durability `
 				break
 			default:
 				break
@@ -77,10 +80,11 @@ const EntitySquare: FC<EntitySquareProps> = props => {
 		<div onClick={handleOnClick} onMouseOut={handleMouseOut} onMouseMove={handleMouseOver} className={styles.wrapper}>
 			{props.entity ? <img className={styles.icon} src={props.entity.image} /> : <div className={styles.icon} />}
 			{isHovering && name ? (
-				<div ref={tooltip} style={{ top: position.y, left: position.x }} className={styles.tooltip}>
+				<div ref={tooltip} style={position ? { top: position.y, left: position.x } : undefined} className={styles.tooltip}>
 					<div>{name}</div>
 					<div className={styles.muted}>{type}</div>
 					<div className={styles.muted}>{effect}</div>
+					{durability ? <div className={styles.muted}>{durability}</div> : null}
 				</div>
 			) : null}
 		</div>

@@ -120,7 +120,8 @@ const GameProvider: FC = props => {
 			}
 			if (entityType === null) return null
 			const type = entities[entityType]
-			return type[Math.floor(Math.random() * type.length)]
+			const entity = type[Math.floor(Math.random() * type.length)]
+			return JSON.parse(JSON.stringify(entity))
 		}
 
 		for (let y = 0; y < height; y++) {

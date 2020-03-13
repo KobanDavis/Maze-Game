@@ -39,13 +39,21 @@ export interface UserState extends Stats {
 	position: Coords
 	armor: Record<ArmorType, Entity<ArmorPiece>>
 	weapon: Entity<Weapon>
+	level: number
+	experience: number
+	experienceThreshold: number
 }
 
 export interface Weapon {
+	// range: number
 	attack: number
+	durability: number
+	maxDurability: number
 }
 
 export interface ArmorPiece {
+	durability: number
+	maxDurability: number
 	defence: number
 	type: ArmorType
 }
