@@ -11,7 +11,7 @@ interface EntityProps {
 	playerPosition: Coords
 }
 
-const EntityComponent: FC<EntityProps> = props => {
+const EntityComponent: FC<EntityProps> = (props) => {
 	const [visitedRooms, setVisitedRooms] = useState<Set<string>>(new Set())
 	const { user, addGold, addToInventory } = useUser()
 	const { deleteEntity, startFight, endGame, gameState } = useGame()
@@ -51,7 +51,7 @@ const EntityComponent: FC<EntityProps> = props => {
 				const n = /[aeiou]/i.test(room.entity.name.charAt(0)) ? 'n' : '' // starts with vowel?
 				sendMessage(room.entity.type === 'exit' ? 'You found the exit!' : `You found a${n} ${room.entity.name}!`)
 			}
-			setVisitedRooms(o => (o.add(coords), o))
+			setVisitedRooms((o) => (o.add(coords), o))
 		}
 	}, [user.position])
 
@@ -75,8 +75,9 @@ const EntityComponent: FC<EntityProps> = props => {
 		<div
 			className={styles.entity}
 			style={{
+				zIndex: 1,
 				transform: `scale(${room.entity.type === 'enemy' || room.entity.type === 'exit' ? 1.2 : 0.7})`,
-				backgroundImage: `url(${room.entity.image})`
+				backgroundImage: `url(${room.entity.image})`,
 			}}
 		></div>
 	) : null
